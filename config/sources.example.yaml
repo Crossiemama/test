@@ -1,0 +1,23 @@
+sources:
+  - name: ats_energo
+    source_type: http_json
+    url: "https://example.com/ats"
+    datetime_col: "datetime"
+    value_col: "planned_consumption"
+
+  - name: so_ups
+    source_type: http_csv
+    url: "https://example.com/so_ups.csv"
+    datetime_col: "datetime"
+    value_col: "actual_consumption"
+
+  - name: np_sr
+    source_type: file_csv
+    path: "data/np_sr.csv"
+    datetime_col: "datetime"
+    value_col: "system_indicator"
+
+processing:
+  timezone: "Europe/Moscow"
+  freq: "H"
+  workday_only: true
