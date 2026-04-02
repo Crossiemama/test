@@ -1,6 +1,6 @@
 from sqlalchemy import select
 
-from bot.models import SystemSetting
+from bot.models.entities import SystemSetting
 from bot.repositories.base import BaseRepository
 
 
