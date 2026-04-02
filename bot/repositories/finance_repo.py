@@ -5,7 +5,7 @@ from decimal import Decimal
 
 from sqlalchemy import and_, func, select
 
-from bot.models import Debt, Expense, Goal, Income, Limit
+from bot.models.entities import Debt, Expense, Goal, Income, Limit
 from bot.repositories.base import BaseRepository
 
 
