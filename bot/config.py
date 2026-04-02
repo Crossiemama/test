@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from os import getenv
 
+from aiogram.utils.token import TokenValidationError, validate_token
 from dotenv import load_dotenv
 
 
@@ -19,12 +20,23 @@ class Settings:
     underfunded_build_delta: int = 50000
 
 
+def _normalize_bot_token(raw_token: str) -> str:
+    token = raw_token.strip().strip("\"'")
+    if not token:
+        raise ValueError("BOT_TOKEN не задан в .env")
+
+    try:
+        validate_token(token)
+    except TokenValidationError as exc:
+        raise ValueError(
+            "BOT_TOKEN имеет неверный формат. Получите токен у @BotFather и укажите без кавычек и пробелов."
+        ) from exc
+    return token
+
 
 def load_settings() -> Settings:
     load_dotenv()
-    token = getenv("BOT_TOKEN", "")
-    if not token:
-        raise ValueError("BOT_TOKEN не задан в .env")
+    token = _normalize_bot_token(getenv("BOT_TOKEN", ""))
 
     return Settings(
         bot_token=token,
