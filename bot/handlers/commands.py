@@ -31,7 +31,21 @@ async def start_cmd(message: Message, session_maker):
 @router.message(Command("help"))
 async def help_cmd(message: Message):
     await message.answer(
-        "Доступные команды: /today /add_expense /add_income /limits /goals /debts /build /week /month /approve /decision /settings"
+        "Доступные команды:\n"
+        "/start — Меню\n"
+        "/help — Справка\n"
+        "/today — Сегодня\n"
+        "/add_expense — Добавить расход\n"
+        "/add_income — Добавить доход\n"
+        "/limits — Лимиты\n"
+        "/goals — Цели\n"
+        "/debts — Долги\n"
+        "/build — Бюджет стройки\n"
+        "/week — Неделя\n"
+        "/month — Месяц\n"
+        "/approve — Согласование\n"
+        "/decision — Вопрос по трате\n"
+        "/settings — Настройки"
     )
 
 

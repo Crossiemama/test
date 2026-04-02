@@ -7,6 +7,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.types import BotCommand
 
 from bot.config import load_settings
 from bot.db.session import Database
@@ -25,6 +26,22 @@ async def main() -> None:
         await seed_data(session, settings)
 
     bot = Bot(token=settings.bot_token, default=DefaultBotProperties(parse_mode=ParseMode.MARKDOWN))
+    await bot.set_my_commands([
+        BotCommand(command="start", description="Меню"),
+        BotCommand(command="help", description="Справка"),
+        BotCommand(command="today", description="Сегодня"),
+        BotCommand(command="add_expense", description="Добавить расход"),
+        BotCommand(command="add_income", description="Добавить доход"),
+        BotCommand(command="limits", description="Лимиты"),
+        BotCommand(command="goals", description="Цели"),
+        BotCommand(command="debts", description="Долги"),
+        BotCommand(command="build", description="Бюджет стройки"),
+        BotCommand(command="week", description="Неделя"),
+        BotCommand(command="month", description="Месяц"),
+        BotCommand(command="approve", description="Согласование"),
+        BotCommand(command="decision", description="Вопрос по трате"),
+        BotCommand(command="settings", description="Настройки"),
+    ])
     dp = Dispatcher(storage=MemoryStorage())
 
     dp["session_maker"] = db.session
